@@ -6,6 +6,7 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { RegisterComponent } from './components/register/register.component';
 import { reducer } from './store/reducers';
+import { AuthService } from './services/auth.service';
 
 const routes: Routes = [
   {
@@ -21,5 +22,6 @@ const routes: Routes = [
     StoreModule.forFeature('auth', reducer),
   ],
   declarations: [RegisterComponent],
+  providers: [AuthService],
 })
 export class AuthModule {}
