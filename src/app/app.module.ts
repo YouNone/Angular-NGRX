@@ -8,6 +8,7 @@ import { AppComponent } from './app.component';
 import { AuthModule } from './auth/auth.module';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { EffectsModule } from '@ngrx/effects';
 // import { environment } from 'src/environments/environment';
 
 @NgModule({
@@ -20,6 +21,7 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
     AppRoutingModule,
     AuthModule,
     StoreModule.forRoot({}),
+    EffectsModule.forRoot([]),
     StoreDevtoolsModule.instrument({
       maxAge: 25, // Retains last 25 states
       logOnly: !isDevMode(),
