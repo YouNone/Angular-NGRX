@@ -2,13 +2,13 @@ import { NgModule, isDevMode } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AuthModule } from './auth/auth.module';
-import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
-import { EffectsModule } from '@ngrx/effects';
 // import { environment } from 'src/environments/environment';
 
 @NgModule({

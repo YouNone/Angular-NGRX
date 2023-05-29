@@ -1,12 +1,15 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Store, select } from '@ngrx/store';
-import { registerAction } from '../../store/actions/register.actions';
 import { Observable } from 'rxjs';
-import { isSubmittingSelector } from '../../store/selectors';
-import { AuthService } from '../../services/auth.service';
-import { CurrentUserInterface } from 'src/app/shared/types/currentUser.interface';
+
+import { registerAction } from '../../store/actions/register.actions';
+import {
+  isSubmittingSelector,
+  validationErrorsSelector,
+} from '../../store/selectors';
 import { RegisterRequestInterface } from '../../types/registerRequest.interface';
+import { BackendErrorsInterface } from 'src/app/shared/types/backendErrors.interface';
 
 @Component({
   selector: 'mc-register',
@@ -15,12 +18,10 @@ import { RegisterRequestInterface } from '../../types/registerRequest.interface'
 })
 export class RegisterComponent {
   form: FormGroup;
-  isSubmitting: Observable<boolean>;
-  constructor(
-    private fb: FormBuilder,
-    private store: Store,
-    private authService: AuthService
-  ) {}
+  isSubmitting$: Observable<boolean>;
+  backendErrors$: Observable<BackendErrorsInterface | null>;
+
+  constructor(private fb: FormBuilder, private store: Store) {}
 
   ngOnInit(): void {
     this.initializeForm();
@@ -37,8 +38,10 @@ export class RegisterComponent {
   }
 
   initializeValues(): void {
-    this.isSubmitting = this.store.pipe(select(isSubmittingSelector));
-    console.log('isSubmitting', this.isSubmitting);
+    this.isSubmitting$ = this.store.pipe(select(isSubmittingSelector));
+    this.backendErrors$ = this.store.pipe(select(validationErrorsSelector));
+
+    console.log('isSubmitting$', this.isSubmitting$);
   }
 
   onSubmit(): void {
@@ -47,11 +50,5 @@ export class RegisterComponent {
       user: this.form.value,
     };
     this.store.dispatch(registerAction({ request }));
-
-    // this.authService
-    //   .register(this.form.value)
-    //   .subscribe((currentUser: CurrentUserInterface) => {
-    //     console.log('currentUser', currentUser);
-    //   });
   }
 }
