@@ -9,6 +9,7 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AuthModule } from './auth/auth.module';
+import { TopBarModule } from './shared/modules/top-bar/top-bar.module';
 // import { environment } from 'src/environments/environment';
 
 @NgModule({
@@ -29,6 +30,7 @@ import { AuthModule } from './auth/auth.module';
       // trace: false, //  If set to true, will include stack trace for every dispatched action, so you can see it in trace tab jumping directly to that part of code
       // traceLimit: 75, // maximum stack trace frames to be stored (in case trace option was provided as true)
     }),
+    TopBarModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
