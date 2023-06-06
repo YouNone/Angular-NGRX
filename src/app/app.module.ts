@@ -16,6 +16,7 @@ import { AuthModule } from './auth/auth.module';
 import { TopBarModule } from './shared/modules/top-bar/top-bar.module';
 import { PersistenceService } from './shared/services/persistence.service';
 import { AuthInterseptor } from './shared/services/authInterseptor';
+import { GlobalFeedModule } from './globalFeed/global-feed.module';
 // import { environment } from 'src/environments/environment';
 
 @NgModule({
@@ -37,6 +38,7 @@ import { AuthInterseptor } from './shared/services/authInterseptor';
       // traceLimit: 75, // maximum stack trace frames to be stored (in case trace option was provided as true)
     }),
     TopBarModule,
+    GlobalFeedModule,
   ],
   providers: [
     PersistenceService,
