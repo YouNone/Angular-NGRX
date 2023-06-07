@@ -5,6 +5,9 @@ import { Observable, Subscription } from 'rxjs';
 
 import { getFeedAction } from '../../store/actions/getFeed.action';
 import { GetFeedResponseInterface } from '../../types/getFeedResponse.interface';
+// import { parseUrl } from 'query-string/base';
+import queryString from 'query-string';
+
 import {
   errorSelector,
   feedSelector,
@@ -25,7 +28,7 @@ export class FeedComponent implements OnInit, OnDestroy {
   feed$: Observable<GetFeedResponseInterface | null>;
   limit = environment.limit;
   baseUrl: string;
-  queryParamsSubsccribtion$: Subscription;
+  queryParamsSubscribtion$: Subscription;
   currentPage: number;
 
   constructor(
@@ -36,8 +39,7 @@ export class FeedComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.initializeValues();
-    this.fetchData();
-    this.intitializeListeners;
+    this.intitializeListeners();
   }
 
   initializeValues() {
@@ -48,18 +50,27 @@ export class FeedComponent implements OnInit, OnDestroy {
   }
 
   intitializeListeners() {
-    this.queryParamsSubsccribtion$ = this.route.queryParams.subscribe(
+    this.queryParamsSubscribtion$ = this.route.queryParams.subscribe(
       (params: Params) => {
         this.currentPage = Number(params['page'] || '1');
+        this.fetchFeed();
       }
     );
   }
 
-  fetchData() {
-    this.store.dispatch(getFeedAction({ url: this.apiUrlProps }));
+  fetchFeed() {
+    const offset = this.currentPage * this.limit - this.limit;
+    const parsedUrl = queryString.parseUrl(this.apiUrlProps);
+    const strignifiedParams = queryString.stringify({
+      limit: this.limit,
+      offset,
+      ...parsedUrl.query,
+    });
+    const apiUrlWithParams = `${parsedUrl.url}?${strignifiedParams}`;
+    this.store.dispatch(getFeedAction({ url: apiUrlWithParams }));
   }
 
   ngOnDestroy(): void {
-    this.queryParamsSubsccribtion$.unsubscribe();
+    this.queryParamsSubscribtion$.unsubscribe();
   }
 }
