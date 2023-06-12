@@ -20,7 +20,8 @@
     <a [routerLink]="['/articles', article.slug]" class="preview-link">
       <h1>{{ article.title }}</h1>
       <p>{{ article.description }}</p>
-      here is list of tags
+      {{ article.tagList }}
+      <mc-tag-list [tags]="article.tagList"></mc-tag-list>
     </a>
   </div>
   <mc-paginator

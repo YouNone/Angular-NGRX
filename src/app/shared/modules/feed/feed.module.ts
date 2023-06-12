@@ -11,6 +11,7 @@ import { RouterModule } from '@angular/router';
 import { ErrorMessageModule } from '../error-message/error-message.module';
 import { LoadingModule } from '../loading/loading.module';
 import { PaginationModule } from '../pagination/pagination.module';
+import { TagListModule } from '../tagList/tag-list.module';
 
 @NgModule({
   declarations: [FeedComponent],
@@ -22,6 +23,7 @@ import { PaginationModule } from '../pagination/pagination.module';
     ErrorMessageModule,
     LoadingModule,
     PaginationModule,
+    TagListModule,
   ],
   exports: [FeedComponent],
   providers: [FeedService],
