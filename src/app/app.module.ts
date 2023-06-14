@@ -16,6 +16,7 @@ import { PersistenceService } from './shared/services/persistence.service';
 import { AuthInterseptor } from './shared/services/authInterseptor';
 import { GlobalFeedModule } from './globalFeed/global-feed.module';
 import { TagListComponent } from './shared/modules/tagList/components/tag-list/tag-list.component';
+import { YourFeedModule } from './your-feed/your-feed.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -38,6 +39,7 @@ import { TagListComponent } from './shared/modules/tagList/components/tag-list/t
     StoreRouterConnectingModule.forRoot(),
     TopBarModule,
     GlobalFeedModule,
+    YourFeedModule,
   ],
   providers: [
     PersistenceService,
